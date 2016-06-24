@@ -44,6 +44,7 @@
     <Compile Include="EntityStatus.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="Indicator.cs" />
+    <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
