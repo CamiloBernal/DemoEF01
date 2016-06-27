@@ -1,4 +1,6 @@
-﻿namespace EfDemo.Core.Model
+﻿using System;
+
+namespace EfDemo.Core.Model
 {
     public class Category
     {
@@ -6,5 +8,7 @@
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
         public EntityStatus CategoryStatus { get; set; }
+
+       
     }
 }

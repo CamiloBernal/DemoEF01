@@ -1,0 +1,30 @@
+﻿@model EfDemo.Data.Presentation.Web.DefaultSite.Models.CategoryModel
+
+@{
+    ViewBag.Title = "New Category";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>New Category</legend>
+        <div>
+            @Html.LabelFor(model => model.CategoryName)
+            @Html.TextBoxFor(model => model.CategoryName)
+
+        </div>
+        <div>
+            @Html.LabelFor(model => model.CategoryDescription)
+            @Html.TextAreaFor(model => model.CategoryDescription)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.CategoryStatus)
+            @Html.EnumDropDownListFor(model => model.CategoryStatus)
+        </div>
+        <div>
+            <input type="submit" value="Register new category" />
+        </div>
+    </fieldset>
+}

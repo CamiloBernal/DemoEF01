@@ -11,8 +11,8 @@ namespace EfDemo.Core.Repositories
     public interface ICategoryRepository
     {
 
-        Task<IEnumerable<Category>> GetCategoriesAsync(CancellationToken cancellation = default(CancellationToken));
-        Task<int> SaveCategoriesAsync(Category category, CancellationToken cancellation = default(CancellationToken));
+        Task<IEnumerable<Category>> GetCategoriesAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<int> SaveCategoryAsync(Category category, CancellationToken cancellationToken = default(CancellationToken));
 
 
 
