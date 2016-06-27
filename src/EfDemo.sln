@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{241CFFB3-9D1C-4057-9474-3D5BC46F3C8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfDemo.Core.Model", "EfDemo.Core.Model\EfDemo.Core.Model.csproj", "{8687933E-5BD4-45B2-8386-4A2E2A937272}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfDemo.Core.Repositories", "EfDemo.Core.Repositories\EfDemo.Core.Repositories.csproj", "{D3BB4B1D-820C-4AA7-BE6E-BD81D485CE8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,11 +19,16 @@ Global
 		{8687933E-5BD4-45B2-8386-4A2E2A937272}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8687933E-5BD4-45B2-8386-4A2E2A937272}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8687933E-5BD4-45B2-8386-4A2E2A937272}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BB4B1D-820C-4AA7-BE6E-BD81D485CE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BB4B1D-820C-4AA7-BE6E-BD81D485CE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BB4B1D-820C-4AA7-BE6E-BD81D485CE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BB4B1D-820C-4AA7-BE6E-BD81D485CE8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8687933E-5BD4-45B2-8386-4A2E2A937272} = {241CFFB3-9D1C-4057-9474-3D5BC46F3C8D}
+		{D3BB4B1D-820C-4AA7-BE6E-BD81D485CE8E} = {241CFFB3-9D1C-4057-9474-3D5BC46F3C8D}
 	EndGlobalSection
 EndGlobal
