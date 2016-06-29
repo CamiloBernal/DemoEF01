@@ -1,5 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using EfDemo.Application.Services.Security;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
 namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
@@ -16,5 +18,8 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
             }
             return RedirectToAction("Index", "Home");
         }
+
+        public ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+      
     }
 }

@@ -10,16 +10,15 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
     {
         protected const string XsrfKey = "XsrfId";
         private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        
 
         protected AccountControllerBase()
         {
             //Default Ctor
         }
 
-        protected AccountControllerBase(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        protected AccountControllerBase(ApplicationSignInManager signInManager)
         {
-            UserManager = userManager;
             SignInManager = signInManager;
         }
 
@@ -43,28 +42,11 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
             }
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
+       
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-
                 if (_signInManager != null)
                 {
                     _signInManager.Dispose();

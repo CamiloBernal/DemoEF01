@@ -18,8 +18,8 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
             //Default CTOR
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-            : base(userManager, signInManager)
+        public AccountController(ApplicationSignInManager signInManager)
+            : base(signInManager)
         {
             //Default Ctor
         }
