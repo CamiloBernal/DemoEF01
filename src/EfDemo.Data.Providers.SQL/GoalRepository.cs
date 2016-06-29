@@ -7,9 +7,10 @@ using EfDemo.Core.Repositories;
 
 namespace EfDemo.Data.Providers.SQL
 {
-    public class GoalRepository: IGoalRepository
+    public class GoalRepository : IGoalRepository
     {
         private readonly GoalsDbContext _goalsDbContext;
+
         public GoalRepository(string connectionString)
         {
             _goalsDbContext = new GoalsDbContext(connectionString);
@@ -18,7 +19,6 @@ namespace EfDemo.Data.Providers.SQL
         public async Task<IEnumerable<Goal>> GetGoalsAsync(
             CancellationToken cancellationToken = default(CancellationToken))
             => await _goalsDbContext.Goals.ToListAsync(cancellationToken).ConfigureAwait(false);
-        
 
         public async Task<int> InsertGoalAsync(Goal goal, CancellationToken cancellationToken = default(CancellationToken))
         {

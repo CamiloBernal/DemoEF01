@@ -8,9 +8,11 @@ using EfDemo.Data.Presentation.Web.DefaultSite.Models;
 
 namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
 {
-    public class CategoryController:BaseController
+    [Authorize()]
+    public class CategoryController : BaseController
     {
         private readonly ICategoryRepository _categoryRepository;
+
         public CategoryController(ICategoryRepository categoryRepository)
         {
             if (categoryRepository == null) throw new ArgumentNullException(nameof(categoryRepository));
@@ -21,6 +23,7 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
 
         public ActionResult NewCategory() => View();
 
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NewCategory(CategoryModel category)
         {

@@ -4,7 +4,6 @@
     ViewBag.Title = "New Category";
 }
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -13,7 +12,6 @@
         <div>
             @Html.LabelFor(model => model.CategoryName)
             @Html.TextBoxFor(model => model.CategoryName)
-
         </div>
         <div>
             @Html.LabelFor(model => model.CategoryDescription)

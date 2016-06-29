@@ -7,9 +7,8 @@ namespace EfDemo.Core.Repositories
 {
     public interface IGoalRepository
     {
-
         Task<IEnumerable<Goal>> GetGoalsAsync(CancellationToken cancellationToken = default(CancellationToken));
-        Task<int> InsertGoalAsync(Goal goal, CancellationToken cancellationToken = default(CancellationToken));
 
+        Task<int> InsertGoalAsync(Goal goal, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

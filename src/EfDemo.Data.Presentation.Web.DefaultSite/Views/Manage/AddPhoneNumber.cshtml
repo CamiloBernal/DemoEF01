@@ -1,0 +1,25 @@
+﻿@model EfDemo.Data.Presentation.Web.DefaultSite.Models.Manage.AddPhoneNumberViewModel
+@{
+    ViewBag.Title = "Phone Number";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Add a phone number</h4>
+    <hr />
+    @Html.ValidationSummary("")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Number)
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Number)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </div>
+}

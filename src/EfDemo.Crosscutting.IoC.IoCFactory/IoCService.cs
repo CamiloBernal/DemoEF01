@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EfDemo.Core.Repositories;
 using EfDemo.Data.Providers.SQL;
 using Microsoft.Practices.Unity;
 
 namespace EfDemo.Crosscutting.IoC.IoCFactory
 {
-    public class IoCService
+    public static class IoCService
     {
         private static readonly Lazy<IUnityContainer> InternalContainer = new Lazy<IUnityContainer>(() =>
         {
@@ -25,7 +21,6 @@ namespace EfDemo.Crosscutting.IoC.IoCFactory
         {
             RegisterTypes(InternalContainer.Value);
         }
-
 
         public static void RegisterTypes(IUnityContainer container)
         {

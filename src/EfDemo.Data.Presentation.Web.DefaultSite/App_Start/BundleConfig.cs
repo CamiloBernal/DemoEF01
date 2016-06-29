@@ -6,7 +6,6 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            
         }
     }
 }

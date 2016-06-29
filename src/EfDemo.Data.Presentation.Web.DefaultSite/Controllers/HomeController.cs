@@ -3,9 +3,8 @@ using EfDemo.Data.Presentation.Web.DefaultSite.CodeBase;
 
 namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
 {
-    public class HomeController:BaseController
+    public class HomeController : BaseController
     {
         public ActionResult Index() => View();
-        
     }
 }
