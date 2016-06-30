@@ -10,7 +10,6 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
     {
         protected const string XsrfKey = "XsrfId";
         private ApplicationSignInManager _signInManager;
-        
 
         protected AccountControllerBase()
         {
@@ -42,7 +41,6 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
             }
         }
 
-       
         protected override void Dispose(bool disposing)
         {
             if (disposing)

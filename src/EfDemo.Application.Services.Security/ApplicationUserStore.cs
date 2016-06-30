@@ -164,6 +164,7 @@ namespace EfDemo.Application.Services.Security
             await EnsureClaimsLoaded(user).ConfigureAwait(false);
             return user.Claims.Select(c => new Claim(c.ClaimType, c.ClaimValue)).ToList();
         }
+
         public virtual Task<string> GetEmailAsync(ApplicationUser user)
         {
             ThrowIfDisposed();
@@ -303,6 +304,7 @@ namespace EfDemo.Application.Services.Security
                 _userClaims.Remove(c);
             }
         }
+
         public virtual async Task RemoveFromRoleAsync(ApplicationUser user, string roleName)
         {
             ThrowIfDisposed();
@@ -371,6 +373,7 @@ namespace EfDemo.Application.Services.Security
             user.EmailConfirmed = confirmed;
             return Task.FromResult(0);
         }
+
         public virtual Task SetLockoutEnabledAsync(ApplicationUser user, bool enabled)
         {
             ThrowIfDisposed();
@@ -387,6 +390,7 @@ namespace EfDemo.Application.Services.Security
             user.LockoutEndDateUtc = lockoutEnd == DateTimeOffset.MinValue ? (DateTime?)null : lockoutEnd.UtcDateTime;
             return Task.FromResult(0);
         }
+
         public virtual Task SetPasswordHashAsync(ApplicationUser user, string passwordHash)
         {
             ThrowIfDisposed();
@@ -434,6 +438,7 @@ namespace EfDemo.Application.Services.Security
             _userStore.Update(user);
             await SaveChanges().ConfigureAwait(false);
         }
+
         protected virtual void Dispose(bool disposing)
         {
             if (DisposeContext && disposing)
@@ -511,6 +516,7 @@ namespace EfDemo.Application.Services.Security
                 await Context.SaveChangesAsync().ConfigureAwait(false);
             }
         }
+
         private void ThrowIfDisposed()
         {
             if (_disposed)
@@ -518,13 +524,16 @@ namespace EfDemo.Application.Services.Security
                 throw new ObjectDisposedException(GetType().Name);
             }
         }
+
         private static class FindByIdFilterParser
         {
             // expression pattern we need to match
             private static readonly Expression<Func<ApplicationUser, bool>> Predicate = u => u.Id.Equals(default(long));
-            // method we need to match: Object.Equals() 
+
+            // method we need to match: Object.Equals()
             private static readonly MethodInfo EqualsMethodInfo = ((MethodCallExpression)Predicate.Body).Method;
-            // property access we need to match: User.Id 
+
+            // property access we need to match: User.Id
             private static readonly MemberInfo UserIdMemberInfo = ((MemberExpression)((MethodCallExpression)Predicate.Body).Object).Member;
 
             internal static bool TryMatchAndGetId(Expression<Func<ApplicationUser, bool>> filter, out long id)

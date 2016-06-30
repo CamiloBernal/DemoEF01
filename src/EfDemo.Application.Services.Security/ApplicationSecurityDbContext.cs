@@ -23,7 +23,7 @@ namespace EfDemo.Application.Services.Security
 
         public bool RequireUniqueEmail { get; set; }
 
-        public virtual IDbSet<EfDemo.Core.Model.Role> Roles { get; set; }
+        public virtual IDbSet<Core.Model.Role> Roles { get; set; }
 
         public virtual IDbSet<ApplicationUser> Users { get; set; }
 
@@ -35,9 +35,10 @@ namespace EfDemo.Application.Services.Security
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             if (modelBuilder == null) throw new ArgumentNullException(nameof(modelBuilder));
+            base.OnModelCreating(modelBuilder);
 
             // Needed to ensure subclasses share the same table
-            var user = modelBuilder.Entity<EfDemo.Core.Model.User>()
+            var user = modelBuilder.Entity<Core.Model.User>()
                 .ToTable(_securityModelConfig.ApplicationUserTableName);
             user.HasMany(u => u.Roles).WithRequired().HasForeignKey(ur => ur.UserId);
             user.HasMany(u => u.Claims).WithRequired().HasForeignKey(uc => uc.UserId);
@@ -50,18 +51,18 @@ namespace EfDemo.Application.Services.Security
             // CONSIDER: u.Email is Required if set on options?
             user.Property(u => u.Email).HasMaxLength(256);
 
-            modelBuilder.Entity<EfDemo.Core.Model.UserRole>()
+            modelBuilder.Entity<Core.Model.UserRole>()
                 .HasKey(r => new { r.UserId, r.RoleId })
                 .ToTable(_securityModelConfig.ApplicationUserRoleTableName);
 
-            modelBuilder.Entity<EfDemo.Core.Model.UserLogin>()
+            modelBuilder.Entity<Core.Model.UserLogin>()
                 .HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId })
                 .ToTable(_securityModelConfig.ApplicationUserLoginTableName);
 
-            modelBuilder.Entity<EfDemo.Core.Model.UserClaim>()
+            modelBuilder.Entity<Core.Model.UserClaim>()
                 .ToTable(_securityModelConfig.ApplicationUserClaimTableName);
 
-            var role = modelBuilder.Entity<EfDemo.Core.Model.Role>()
+            var role = modelBuilder.Entity<Core.Model.Role>()
                 .ToTable(_securityModelConfig.ApplicationRoleTableName);
             role.Property(r => r.Name)
                 .IsRequired()
@@ -70,14 +71,13 @@ namespace EfDemo.Application.Services.Security
             role.HasMany(r => r.Users).WithRequired().HasForeignKey(ur => ur.RoleId);
         }
 
-       
         protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry,
             IDictionary<object, object> items)
         {
             if (entityEntry == null || entityEntry.State != EntityState.Added)
                 return base.ValidateEntity(entityEntry, items);
             var errors = new List<DbValidationError>();
-            var user = entityEntry.Entity as EfDemo.Core.Model.User;
+            var user = entityEntry.Entity as Core.Model.User;
             //check for uniqueness of user name and email
             if (user != null)
             {
@@ -94,7 +94,7 @@ namespace EfDemo.Application.Services.Security
             }
             else
             {
-                var role = entityEntry.Entity as EfDemo.Core.Model.Role;
+                var role = entityEntry.Entity as Core.Model.Role;
                 //check for uniqueness of role name
                 if (role != null && Roles.Any(r => string.Equals(r.Name, role.Name)))
                 {

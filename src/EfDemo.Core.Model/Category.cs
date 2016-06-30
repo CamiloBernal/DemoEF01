@@ -6,5 +6,7 @@
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
         public EntityStatus CategoryStatus { get; set; }
+
+        public User CreatedBy { get; set; }
     }
 }

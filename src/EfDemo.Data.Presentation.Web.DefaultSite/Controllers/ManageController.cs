@@ -53,7 +53,7 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
             // Generate the token and send it
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId<long>(), model.Number);
             if (UserManager.SmsService == null)
-                return RedirectToAction("VerifyPhoneNumber", new {PhoneNumber = model.Number});
+                return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
             var message = new IdentityMessage
             {
                 Destination = model.Number,

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using EfDemo.Application.Services.Security;
-using EfDemo.Core.Model;
 
 namespace EfDemo.Data.Presentation.Web.DefaultSite.Models.Account
 {
@@ -23,11 +22,16 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Models.Account
         [Compare("Password", ErrorMessage = @"The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = @"Date of creation")]
+        [Required]
+        public DateTime DateOfCreation { get; set; }
 
         public static explicit operator ApplicationUser(RegisterViewModel source) => new ApplicationUser()
         {
             UserName = source.Email,
             Email = source.Email,
-        };        
+            DateOfCreation = source.DateOfCreation
+        };
     }
 }

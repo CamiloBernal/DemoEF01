@@ -32,6 +32,7 @@ namespace EfDemo.Application.Services.Security
         {
             return DbEntitySet.FindAsync(id);
         }
+
         public virtual void Update(TEntity entity)
         {
             if (entity != null)

@@ -2,12 +2,12 @@
 {
     public class UserClaim
     {
-        public virtual int Id { get; set; }
+        public int Id { get; set; }
 
-        public virtual long UserId { get; set; }
+        public long UserId { get; set; }
 
-        public virtual string ClaimType { get; set; }
+        public string ClaimType { get; set; }
 
-        public virtual string ClaimValue { get; set; }
+        public string ClaimValue { get; set; }
     }
 }

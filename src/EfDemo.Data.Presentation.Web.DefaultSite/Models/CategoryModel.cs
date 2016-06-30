@@ -8,17 +8,19 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Models
         public int CategoryId { get; set; }
 
         [Required]
-        [Display(Name = "Category name:")]
+        [Display(Name = @"Category name:")]
         [MaxLength(50)]
         public string CategoryName { get; set; }
 
         [Required]
-        [Display(Name = "Category description:")]
+        [Display(Name = @"Category description:")]
         public string CategoryDescription { get; set; }
 
         [Required]
-        [Display(Name = "Category status:")]
+        [Display(Name = @"Category status:")]
         public EntityStatus CategoryStatus { get; set; }
+
+        public User CreatedBy { get; set; }
 
         public static explicit operator Category(CategoryModel v) => new Category
         {

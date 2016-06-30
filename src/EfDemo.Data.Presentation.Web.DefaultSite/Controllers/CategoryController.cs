@@ -27,10 +27,9 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> NewCategory(CategoryModel category)
         {
-            if (ModelState.IsValid)
-            {
-                await _categoryRepository.SaveCategoryAsync((Category)category).ConfigureAwait(false);
-            }
+            if (!ModelState.IsValid) return View(category);
+            category.CreatedBy = GetCurrentUser();
+            await _categoryRepository.SaveCategoryAsync((Category)category).ConfigureAwait(false);
             return View(category);
         }
     }
