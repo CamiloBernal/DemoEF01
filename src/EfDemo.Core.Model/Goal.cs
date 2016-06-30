@@ -4,7 +4,7 @@ namespace EfDemo.Core.Model
 {
     public class Goal
     {
-        public IUser GoalOwner { get; set; }
+        public User GoalOwner { get; set; }
         public Category GoalCategory { get; set; }
         public string GoalColor { get; set; }
         public string GoalDescription { get; set; }

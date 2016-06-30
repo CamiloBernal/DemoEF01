@@ -7,9 +7,9 @@ using Microsoft.Owin.Security;
 
 namespace EfDemo.Application.Services.Security
 {
-    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
+    public class ApplicationSignInManager : SignInManager<ApplicationUser, long>
     {
-        public ApplicationSignInManager(UserManager<ApplicationUser, string> userManager, IAuthenticationManager authenticationManager)
+        public ApplicationSignInManager(UserManager<ApplicationUser, long> userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
             //Default CTOR

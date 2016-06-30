@@ -27,9 +27,9 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<ActionResult> ConfirmEmail(long userId, string code)
         {
-            if (userId == null || code == null)
+            if (code == null)
             {
                 return View("Error");
             }
@@ -209,11 +209,11 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
 
                 case SignInStatus.Failure:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", @"Invalid login attempt.");
                     return View(model);
 
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", @"Invalid login attempt.");
                     return View(model);
             }
         }
@@ -312,10 +312,6 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
-            {
-                return View("Error");
-            }
             var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
@@ -380,14 +376,15 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Controllers
                     return View("Lockout");
 
                 case SignInStatus.Failure:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", @"Invalid code.");
                     return View(model);
 
                 case SignInStatus.RequiresVerification:
-                    ModelState.AddModelError("", "Requires Verification.");
+                    ModelState.AddModelError("", @"Requires Verification.");
                     return View(model);
+
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", @"Invalid code.");
                     return View(model);
             }
         }

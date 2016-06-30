@@ -3,7 +3,6 @@ using System.Configuration;
 using EfDemo.Application.Services.NotificationService;
 using EfDemo.Application.Services.Security;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
@@ -19,7 +18,7 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Extensions
             app.CreatePerOwinContext<ApplicationUserManager>((a, b) => ApplicationUserManager.Create(a, b, manager =>
             {
                 // Configure validation logic for usernames
-                manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+                manager.UserValidator = new UserValidator<ApplicationUser, long>(manager)
                 {
                     AllowOnlyAlphanumericUserNames = false,
                     RequireUniqueEmail = true
@@ -41,11 +40,11 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Extensions
 
                 // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
                 // You can write your own provider and plug it in here.
-                manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
+                manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser, long>
                 {
                     MessageFormat = "Your security code is {0}"
                 });
-                manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
+                manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser, long>
                 {
                     Subject = "Security Code",
                     BodyFormat = "Your security code is {0}"
@@ -66,7 +65,7 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Extensions
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                    OnValidateIdentity = Application.Services.Security.SecurityStampValidator.OnValidateIdentity(
                       TimeSpan.FromMinutes(30),
                       (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }

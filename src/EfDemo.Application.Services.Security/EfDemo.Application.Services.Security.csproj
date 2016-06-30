@@ -85,12 +85,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationSecurityDbContext.cs" />
     <Compile Include="ApplicationSignInManager.cs" />
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="ApplicationUserManager.cs" />
+    <Compile Include="ApplicationSecurityDbContext.cs" />
+    <Compile Include="ApplicationEntityStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityModelConfig.cs" />
+    <Compile Include="SecurityResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityStampValidator.cs" />
+    <Compile Include="TaskExtensions.cs" />
+    <Compile Include="ApplicationUserStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EfDemo.Core.Model\EfDemo.Core.Model.csproj">
@@ -101,6 +110,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SecurityResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SecurityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

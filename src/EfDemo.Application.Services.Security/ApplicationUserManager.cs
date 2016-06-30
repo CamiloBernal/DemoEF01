@@ -1,14 +1,13 @@
 ﻿using System;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
 namespace EfDemo.Application.Services.Security
 {
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class ApplicationUserManager : UserManager<ApplicationUser, long>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        public ApplicationUserManager(IUserStore<ApplicationUser, long> store)
             : base(store)
         {
             //Default Ctor
@@ -19,13 +18,13 @@ namespace EfDemo.Application.Services.Security
             if (options == null) throw new ArgumentNullException(nameof(options));
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationSecurityDbContext>()));
+            var manager = new ApplicationUserManager(new ApplicationUserStore(context.Get<ApplicationSecurityDbContext>()));
             configuration.Invoke(manager);
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create(purposes));
+                    new DataProtectorTokenProvider<ApplicationUser, long>(dataProtectionProvider.Create(purposes));
             }
             return manager;
         }

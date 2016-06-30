@@ -33,18 +33,19 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="EntityStatus.cs" />
     <Compile Include="Goal.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserClaim.cs" />
+    <Compile Include="UserLogin.cs" />
+    <Compile Include="UserRole.cs" />
     <Compile Include="Indicator.cs" />
-    <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,7 +14,7 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
         {
         }
 
-        public ChallengeResult(string provider, string redirectUri, string userId)
+        public ChallengeResult(string provider, string redirectUri, long? userId)
         {
             LoginProvider = provider;
             RedirectUri = redirectUri;
@@ -23,14 +23,14 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
 
         public string LoginProvider { get; set; }
         public string RedirectUri { get; set; }
-        public string UserId { get; set; }
+        public long? UserId { get; set; }
 
         public override void ExecuteResult(ControllerContext context)
         {
             var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
             if (UserId != null)
             {
-                properties.Dictionary[XsrfKey] = UserId;
+                properties.Dictionary[XsrfKey] = UserId.ToString();
             }
             context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
         }

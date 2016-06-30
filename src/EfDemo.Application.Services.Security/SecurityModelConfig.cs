@@ -3,11 +3,12 @@
     public class SecurityModelConfig
     {
         public string ApplicationUserTableName { get; set; } = "ApplicationUsers";
-        public string IdentityRoleTableName { get; set; } = "ApplicationRoles";
-        public string IdentityUserClaimTableName { get; set; } = "ApplicationUserClaims";
-        public string IdentityUserLoginTableName { get; set; } = "ApplicationUserLogins";
-        public string IdentityUserRoleTableName { get; set; } = "ApplicationUserRoles";
-        public string IdentityUserTableName { get; set; } = "ApplicationUsers";
+        public string ApplicationRoleTableName { get; set; } = "ApplicationRoles";
+        public string ApplicationUserClaimTableName { get; set; } = "ApplicationUserClaims";
+        public string ApplicationUserLoginTableName { get; set; } = "ApplicationUserLogins";
+        public string ApplicationUserRoleTableName { get; set; } = "ApplicationUserRoles";
         public string UserIdFieldName { get; set; } = "UserId";
+        public string UserNameIndex { get; set; } = "UserNameIndex";
+        public string RoleNameIndex { get; set; } = "RoleNameIndex";
     }
 }
