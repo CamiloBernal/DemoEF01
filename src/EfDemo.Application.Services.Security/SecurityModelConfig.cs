@@ -7,7 +7,7 @@
         public string ApplicationUserClaimTableName { get; set; } = "ApplicationUserClaims";
         public string ApplicationUserLoginTableName { get; set; } = "ApplicationUserLogins";
         public string ApplicationUserRoleTableName { get; set; } = "ApplicationUserRoles";
-        public string UserIdFieldName { get; set; } = "UserId";
+        public string UserIdFieldName { get; set; } = "CreatedById";
         public string UserNameIndex { get; set; } = "UserNameIndex";
         public string RoleNameIndex { get; set; } = "RoleNameIndex";
     }

@@ -533,7 +533,7 @@ namespace EfDemo.Application.Services.Security
             // method we need to match: Object.Equals()
             private static readonly MethodInfo EqualsMethodInfo = ((MethodCallExpression)Predicate.Body).Method;
 
-            // property access we need to match: User.Id
+            // property access we need to match: CreatedBy.Id
             private static readonly MemberInfo UserIdMemberInfo = ((MemberExpression)((MethodCallExpression)Predicate.Body).Object).Member;
 
             internal static bool TryMatchAndGetId(Expression<Func<ApplicationUser, bool>> filter, out long id)
@@ -553,7 +553,7 @@ namespace EfDemo.Application.Services.Security
                 {
                     return false;
                 }
-                // left side of Equals() should be an access to User.Id
+                // left side of Equals() should be an access to CreatedBy.Id
                 if (callExpression.Object == null
                     || callExpression.Object.NodeType != ExpressionType.MemberAccess
                     || ((MemberExpression)callExpression.Object).Member != UserIdMemberInfo)

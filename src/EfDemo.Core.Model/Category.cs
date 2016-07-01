@@ -6,7 +6,7 @@
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
         public EntityStatus CategoryStatus { get; set; }
-
-        public User CreatedBy { get; set; }
+        public long CreatedById { get; set; }
+        public virtual User CreatedBy { get; set; }
     }
 }

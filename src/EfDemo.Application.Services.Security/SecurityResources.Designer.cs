@@ -79,7 +79,7 @@ namespace EfDemo.Application.Services.Security {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User name {0} is already taken..
+        ///   Looks up a localized string similar to CreatedBy name {0} is already taken..
         /// </summary>
         internal static string DuplicateUserName {
             get {
@@ -160,7 +160,7 @@ namespace EfDemo.Application.Services.Security {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User already in role..
+        ///   Looks up a localized string similar to CreatedBy already in role..
         /// </summary>
         internal static string UserAlreadyInRole {
             get {
@@ -169,7 +169,7 @@ namespace EfDemo.Application.Services.Security {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The UserId cannot be found..
+        ///   Looks up a localized string similar to The CreatedById cannot be found..
         /// </summary>
         internal static string UserIdNotFound {
             get {
@@ -187,7 +187,7 @@ namespace EfDemo.Application.Services.Security {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} does not exist..
+        ///   Looks up a localized string similar to CreatedBy {0} does not exist..
         /// </summary>
         internal static string UserNameNotFound {
             get {
@@ -196,7 +196,7 @@ namespace EfDemo.Application.Services.Security {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User is not in role..
+        ///   Looks up a localized string similar to CreatedBy is not in role..
         /// </summary>
         internal static string UserNotInRole {
             get {

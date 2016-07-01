@@ -10,7 +10,10 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
 {
     public abstract class BaseController : Controller
     {
+        public ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
         protected IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+
+        protected User GetCurrentUser() => Request.IsAuthenticated ? UserManager.FindById(User.Identity.GetUserId<long>()) : null;
 
         protected ActionResult RedirectToLocal(string returnUrl)
         {
@@ -20,11 +23,5 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.CodeBase
             }
             return RedirectToAction("Index", "Home");
         }
-
-        public ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
-
-        protected User GetCurrentUser() => Request.IsAuthenticated? UserManager.FindById(User.Identity.GetUserId<long>()) : null;
-        
     }
 }

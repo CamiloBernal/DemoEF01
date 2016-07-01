@@ -5,12 +5,25 @@ namespace EfDemo.Data.Providers.SQL
 {
     public class CategoriesDbContext : DbContext
     {
-        public DbSet<Category> Categories { get; set; }
+        public IDbSet<Category> Categories { get; set; }
+        //public IDbSet<User> Users { get; set; }
 
-        public CategoriesDbContext(string connectionString)
-            : base(connectionString)
+        //public IDbSet<UserLogin> UserLogins { get; set; }
+
+        //public IDbSet<UserRole> UserRoles { get; set; }
+
+        public CategoriesDbContext(string nameOrConnectionString)
+            : base(nameOrConnectionString)
         {
             //Default CTOR
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Configurations.Add(new CategoryMappings());
+            modelBuilder.Configurations.Add(new UserLoginMappings());
+            modelBuilder.Configurations.Add(new UserRoleMappings());
         }
     }
 }

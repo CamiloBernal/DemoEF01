@@ -64,6 +64,7 @@ namespace EfDemo.Application.Services.Security
 
             var role = modelBuilder.Entity<Core.Model.Role>()
                 .ToTable(_securityModelConfig.ApplicationRoleTableName);
+
             role.Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(256)
@@ -83,12 +84,12 @@ namespace EfDemo.Application.Services.Security
             {
                 if (Users.Any(u => string.Equals(u.UserName, user.UserName)))
                 {
-                    errors.Add(new DbValidationError("User",
+                    errors.Add(new DbValidationError("CreatedBy",
                         string.Format(CultureInfo.CurrentCulture, SecurityResources.DuplicateUserName, user.UserName)));
                 }
                 if (RequireUniqueEmail && Users.Any(u => string.Equals(u.Email, user.Email)))
                 {
-                    errors.Add(new DbValidationError("User",
+                    errors.Add(new DbValidationError("CreatedBy",
                         string.Format(CultureInfo.CurrentCulture, SecurityResources.DuplicateEmail, user.Email)));
                 }
             }

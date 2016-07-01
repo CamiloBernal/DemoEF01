@@ -27,7 +27,8 @@ namespace EfDemo.Data.Presentation.Web.DefaultSite.Models
             CategoryName = v.CategoryName,
             CategoryDescription = v.CategoryDescription,
             CategoryStatus = v.CategoryStatus,
-            CategoryId = v.CategoryId
+            CategoryId = v.CategoryId,
+            CreatedBy = v.CreatedBy
         };
     }
 }
