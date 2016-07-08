@@ -53,6 +53,8 @@
     <Compile Include="CategoriesDbContext.cs" />
     <Compile Include="CategoryMappings.cs" />
     <Compile Include="CategoryRepository.cs" />
+    <Compile Include="ConfidentialUserInfoDbContext.cs" />
+    <Compile Include="ConfidentialUserInfoRepository.cs" />
     <Compile Include="GoalRepository.cs" />
     <Compile Include="GoalsDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +64,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EfDemo.Application.Services.CriptoModels\EfDemo.Application.Services.CriptoModels.csproj">
+      <Project>{353a3b39-fa36-4045-ab43-85f222c5fa32}</Project>
+      <Name>EfDemo.Application.Services.CriptoModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EfDemo.Application.Services.CriptoServices\EfDemo.Application.Services.CriptoServices.csproj">
+      <Project>{7b50435a-24c3-4761-b8c1-6189ebd3cb3a}</Project>
+      <Name>EfDemo.Application.Services.CriptoServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EfDemo.Core.Model\EfDemo.Core.Model.csproj">
       <Project>{8687933e-5bd4-45b2-8386-4a2e2a937272}</Project>
       <Name>EfDemo.Core.Model</Name>

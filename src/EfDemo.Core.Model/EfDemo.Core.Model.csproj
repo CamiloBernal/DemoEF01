@@ -40,6 +40,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="EntityStatus.cs" />
     <Compile Include="Goal.cs" />
+    <Compile Include="ConfidentialUserInfo.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserClaim.cs" />
@@ -47,6 +48,12 @@
     <Compile Include="UserRole.cs" />
     <Compile Include="Indicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EfDemo.Application.Services.CriptoModels\EfDemo.Application.Services.CriptoModels.csproj">
+      <Project>{353a3b39-fa36-4045-ab43-85f222c5fa32}</Project>
+      <Name>EfDemo.Application.Services.CriptoModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

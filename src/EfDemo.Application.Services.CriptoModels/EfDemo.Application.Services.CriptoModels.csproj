@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3BB4B1D-820C-4AA7-BE6E-BD81D485CE8E}</ProjectGuid>
+    <ProjectGuid>{353A3B39-FA36-4045-AB43-85F222C5FA32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EfDemo.Core.Repositories</RootNamespace>
-    <AssemblyName>EfDemo.Core.Repositories</AssemblyName>
+    <RootNamespace>EfDemo.Application.Services.CriptoModels</RootNamespace>
+    <AssemblyName>EfDemo.Application.Services.CriptoModels</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,20 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICategoryRepository.cs" />
-    <Compile Include="IConfidentialUserInfoRepository.cs" />
-    <Compile Include="IGoalRepository.cs" />
+    <Compile Include="IEncryptedEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EfDemo.Application.Services.CriptoModels\EfDemo.Application.Services.CriptoModels.csproj">
-      <Project>{353a3b39-fa36-4045-ab43-85f222c5fa32}</Project>
-      <Name>EfDemo.Application.Services.CriptoModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EfDemo.Core.Model\EfDemo.Core.Model.csproj">
-      <Project>{8687933e-5bd4-45b2-8386-4a2e2a937272}</Project>
-      <Name>EfDemo.Core.Model</Name>
-    </ProjectReference>
+    <Compile Include="PropertyEncrypted.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
