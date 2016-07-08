@@ -31,7 +31,7 @@ namespace EfDemo.Crosscutting.IoC.IoCFactory
             var defaultConstructor = new InjectionConstructor(connectionString);
             container.RegisterType<ICategoryRepository, CategoryRepository>(defaultConstructor);
             container.RegisterType<IGoalRepository, GoalRepository>(defaultConstructor);
-            container.RegisterType<ICryptoProvider, RsaCryptoProvider>();
+            container.RegisterType<ICryptoProvider, RsaCryptoProvider>(new InjectionConstructor(1024));
             container.RegisterType<IEntitiesEncryptionService, EntitiesEncryptionService>(new InjectionConstructor( new ResolvedParameter<ICryptoProvider>()));
             container.RegisterType<IConfidentialUserInfoRepository, ConfidentialUserInfoRepository>(new InjectionConstructor(connectionString, new ResolvedParameter<IEntitiesEncryptionService>(), publicKey));
         }

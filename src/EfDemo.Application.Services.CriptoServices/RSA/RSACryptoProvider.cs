@@ -13,14 +13,27 @@ namespace EfDemo.Application.Services.CriptoServices.RSA
             _dwKeySize = dwKeySize;
         }
 
-        public string GeneratePrivateKey()
+        public string GeneratePrivateKey(string publicKey)
         {
             using (var rsa = new RSACryptoServiceProvider(_dwKeySize))
             {
-                return rsa.ToXmlString(true);
+                rsa.FromXmlString(publicKey);
+                var keyInfo = rsa.ExportParameters(false);
+                var privateKeyInfo = GeneratePrivateKey();
+                privateKeyInfo.Modulus = keyInfo.Modulus;
+                privateKeyInfo.Exponent = keyInfo.Exponent;
+                return privateKeyInfo.ToXmlString();
             }
         }
 
+        private RSAParameters GeneratePrivateKey()
+        {
+            using (var rsa = new RSACryptoServiceProvider(_dwKeySize))
+            {
+                var privateKey = rsa.ToXmlString(true);
+                return rsa.ExportParameters(true);
+            }
+        }
 
         public string EncryptData(string data, string publicKey)
         {
@@ -47,6 +60,8 @@ namespace EfDemo.Application.Services.CriptoServices.RSA
                 string decryptedData;
                 try
                 {
+                    rsa.FromXmlString(publicKey);
+                    rsa.FromXmlString(privateKey);
                     var resultBytes = Convert.FromBase64String(encryptedData);
                     var decryptedBytes = rsa.Decrypt(resultBytes, true);
                     decryptedData = Encoding.UTF8.GetString(decryptedBytes);

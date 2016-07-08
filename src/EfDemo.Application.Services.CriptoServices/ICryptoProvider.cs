@@ -6,6 +6,6 @@
 
         string EncryptData(string data, string publicKey);
 
-        string GeneratePrivateKey();
+        string GeneratePrivateKey(string publicKey);
     }
 }

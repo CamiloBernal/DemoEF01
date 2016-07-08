@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using EfDemo.Application.Services.CriptoModels;
 
 namespace EfDemo.Application.Services.CriptoServices
@@ -18,7 +17,7 @@ namespace EfDemo.Application.Services.CriptoServices
         public void EncryptEntity<TEntity>(TEntity entity, string publicKey)
             where TEntity : class, IEncryptedEntity
         {
-            var encryptedProperties = entity.GetType().GetProperties(BindingFlags.Public)
+            var encryptedProperties = entity.GetType().GetProperties()
                     .Where(p => p.GetCustomAttributes(typeof(PropertyEncrypted), true).Any(a => p.PropertyType == typeof(string)));
 
             foreach (var property in encryptedProperties)
@@ -29,7 +28,7 @@ namespace EfDemo.Application.Services.CriptoServices
                 property.SetValue(entity, encryptedValue);
                 if (string.IsNullOrEmpty(entity.DecryptionPrivateKey))
                 {
-                    entity.DecryptionPrivateKey = _iCryptoProvider.GeneratePrivateKey();
+                    entity.DecryptionPrivateKey = _iCryptoProvider.GeneratePrivateKey(publicKey);
                 }
             }
         }
@@ -37,7 +36,7 @@ namespace EfDemo.Application.Services.CriptoServices
         public void DecryptEntity<TEntity>(TEntity entity, string publicKey, Action<TEntity, string, string> decryptCallBack)
             where TEntity : class, IEncryptedEntity
         {
-            var encryptedProperties = entity.GetType().GetProperties(BindingFlags.Public)
+            var encryptedProperties = entity.GetType().GetProperties()
                     .Where(p => p.GetCustomAttributes(typeof(PropertyEncrypted), true).Any(a => p.PropertyType == typeof(string)));
             foreach (var property in encryptedProperties)
             {

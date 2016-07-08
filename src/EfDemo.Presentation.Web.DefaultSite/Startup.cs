@@ -13,23 +13,23 @@ namespace EfDemo.Presentation.Web.DefaultSite
     {
         public static void Start()
         {
-            ConfigureIoC();
+            //ConfigureIoC();
         }
 
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            var context = new OwinContext(app.Properties);
-            var token = context.Get<CancellationToken>("host.OnAppDisposing");
-            if (token != CancellationToken.None)
-            {
-                token.Register(() =>
-                {
-                    //App shutdown code
-                    var iocContainer = IoCService.Container;
-                    iocContainer?.Dispose();
-                });
-            }
+            //var context = new OwinContext(app.Properties);
+            //var token = context.Get<CancellationToken>("host.OnAppDisposing");
+            //if (token != CancellationToken.None)
+            //{
+            //    token.Register(() =>
+            //    {
+            //        //App shutdown code
+            //        var iocContainer = IoCService.Container;
+            //        iocContainer?.Dispose();
+            //    });
+            //}
         }
     }
 }
