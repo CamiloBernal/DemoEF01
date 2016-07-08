@@ -62,6 +62,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EfDemo.Application.Services.CriptoServices\EfDemo.Application.Services.CriptoServices.csproj">
+      <Project>{7B50435A-24C3-4761-B8C1-6189EBD3CB3A}</Project>
+      <Name>EfDemo.Application.Services.CriptoServices</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EfDemo.Core.Repositories\EfDemo.Core.Repositories.csproj">
       <Project>{d3bb4b1d-820c-4aa7-be6e-bd81d485ce8e}</Project>
       <Name>EfDemo.Core.Repositories</Name>

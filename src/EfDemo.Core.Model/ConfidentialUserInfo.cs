@@ -1,10 +1,11 @@
-﻿using System;
-using EfDemo.Application.Services.CriptoModels;
+﻿using EfDemo.Application.Services.CriptoModels;
 
 namespace EfDemo.Core.Model
 {
     public class ConfidentialUserInfo : IEncryptedEntity
     {
+        public int ConfidentialUserInfoId { get; set; }
+
         [PropertyEncrypted]
         public string Name { get; set; }
 
@@ -15,10 +16,6 @@ namespace EfDemo.Core.Model
 
         public string Email { get; set; }
 
-
-
         public string DecryptionPrivateKey { get; set; }
-
-        
     }
 }

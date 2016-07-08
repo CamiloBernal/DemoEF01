@@ -1,7 +1,34 @@
-﻿@model EfDemo.Data.Presentation.Web.DefaultSite.Models.ConfidentialUserInfoViewModel
+﻿@model EfDemo.Presentation.Web.DefaultSite.Models.ConfidentialUserInfoViewModel
 
 @{
     ViewBag.Title = "title";
 }
 
-<h2>title</h2>
+<fieldset>
+    <legend>Confidential user data</legend>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+
+        <div>
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.LastName)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Age)
+            @Html.TextBoxFor(m => m.Age)
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email)
+        </div>
+
+        <input type="submit" value="Register confidential data" />
+    }
+</fieldset>

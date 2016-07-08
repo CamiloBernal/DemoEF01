@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="EfDemo.Data.Presentation.Web.DefaultSite.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="EfDemo.Presentation.Web.DefaultSite.Global" Language="C#" %>

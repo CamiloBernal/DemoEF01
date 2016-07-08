@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using EfDemo.Core.Model;
 using EfDemo.Core.Repositories;
+using EfDemo.Crosscutting.IoC.Mvc;
 using EfDemo.Presentation.Web.DefaultSite.Models;
 
 namespace EfDemo.Presentation.Web.DefaultSite.Controllers
