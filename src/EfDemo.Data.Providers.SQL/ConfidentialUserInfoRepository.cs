@@ -13,10 +13,10 @@ namespace EfDemo.Data.Providers.SQL
     {
         private readonly ConfidentialUserInfoDbContext _dbContext;
 
-        public ConfidentialUserInfoRepository(string nameOrConnectionString, IEntitiesEncryptionService encryptionService, string encryptionPublicKey)
+        public ConfidentialUserInfoRepository(string nameOrConnectionString, IEntitiesEncryptionService encryptionService, string sharedCryptoIv)
         {
             if (encryptionService == null) throw new ArgumentNullException(nameof(encryptionService));
-            _dbContext = new ConfidentialUserInfoDbContext(nameOrConnectionString, encryptionService, encryptionPublicKey);
+            _dbContext = new ConfidentialUserInfoDbContext(nameOrConnectionString, encryptionService, sharedCryptoIv);
         }
 
         public async Task<IEnumerable<ConfidentialUserInfo>> GetUserConfidentialInfoAsync(CancellationToken cancellationToken = default(CancellationToken)) => await _dbContext.ConfidentialUserInfo.ToListAsync(cancellationToken).ConfigureAwait(false);

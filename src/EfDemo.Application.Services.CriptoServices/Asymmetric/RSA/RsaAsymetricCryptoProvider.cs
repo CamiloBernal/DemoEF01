@@ -2,13 +2,13 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace EfDemo.Application.Services.CriptoServices.RSA
+namespace EfDemo.Application.Services.CriptoServices.Asymmetric.RSA
 {
-    public class RsaCryptoProvider : ICryptoProvider
+    public class RsaAsymetricCryptoProvider : IAsymetricCryptoProvider
     {
         private readonly int _dwKeySize;
 
-        public RsaCryptoProvider(int dwKeySize = 1024)
+        public RsaAsymetricCryptoProvider(int dwKeySize = 1024)
         {
             _dwKeySize = dwKeySize;
         }

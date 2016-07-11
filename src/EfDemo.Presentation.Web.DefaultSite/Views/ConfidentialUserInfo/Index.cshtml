@@ -1,0 +1,23 @@
+﻿@model IEnumerable<EfDemo.Core.Model.ConfidentialUserInfo>
+
+@{
+    ViewBag.Title = "title";
+}
+
+<h2>Confidencial data</h2>
+@Html.ActionLink("Create new", "Index")
+
+<div>
+
+    @foreach (var item in Model)
+    {
+
+        <div>
+            <strong>Name:</strong><strong>@item.Name</strong><br />
+            <strong>Last name:</strong><strong>@item.LastName</strong><br />
+            <strong>Age:</strong><span>@item.Age</span><br />
+            <strong>Email:</strong><span>@item.Email</span><br />
+        </div>
+        <hr />
+    }
+</div>

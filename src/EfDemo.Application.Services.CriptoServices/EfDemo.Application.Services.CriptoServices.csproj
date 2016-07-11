@@ -43,9 +43,11 @@
     <Compile Include="EntitiesEncryptionService.cs" />
     <Compile Include="IEntitiesEncryptionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ICryptoProvider.cs" />
-    <Compile Include="RSA\RSACryptoProvider.cs" />
-    <Compile Include="RSA\RSAParametersExtensions.cs" />
+    <Compile Include="IAsymetricCryptoProvider.cs" />
+    <Compile Include="Asymmetric\RSA\RsaAsymetricCryptoProvider.cs" />
+    <Compile Include="Asymmetric\RSA\RSAParametersExtensions.cs" />
+    <Compile Include="ISymmetricCryptoProvider.cs" />
+    <Compile Include="Symmetric\Rijndael\RijndaelCryptoProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EfDemo.Application.Services.CriptoModels\EfDemo.Application.Services.CriptoModels.csproj">

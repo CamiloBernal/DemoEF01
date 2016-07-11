@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using EfDemo.Core.Model;
@@ -17,6 +18,13 @@ namespace EfDemo.Presentation.Web.DefaultSite.Controllers
             if (confidentialUserInfoRepository == null)
                 throw new ArgumentNullException(nameof(confidentialUserInfoRepository));
             _confidentialUserInfoRepository = confidentialUserInfoRepository;
+        }
+
+
+        public async Task<ActionResult> Index()
+        {
+            var data = await _confidentialUserInfoRepository.GetUserConfidentialInfoAsync().ConfigureAwait(false);
+            return View(data);
         }
 
         public ActionResult Create()

@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Xml.Serialization;
 
-namespace EfDemo.Application.Services.CriptoServices.RSA
+namespace EfDemo.Application.Services.CriptoServices.Asymmetric.RSA
 {
     public static class RsaParametersExtensions
     {

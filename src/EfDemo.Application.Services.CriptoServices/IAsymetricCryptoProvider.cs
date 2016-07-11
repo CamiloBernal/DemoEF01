@@ -1,6 +1,6 @@
 ﻿namespace EfDemo.Application.Services.CriptoServices
 {
-    public interface ICryptoProvider
+    public interface IAsymetricCryptoProvider
     {
         string DecryptData(string encryptedData, string publicKey, string privateKey);
 

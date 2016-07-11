@@ -14,21 +14,16 @@ namespace EfDemo.Data.Providers.SQL
 {
     public class ConfidentialUserInfoDbContext : DbContext
     {
-        private readonly string _encryptionPublicKey;
+        private readonly string _encryptionIv;
         private readonly IEntitiesEncryptionService _encryptionService;
 
-        public ConfidentialUserInfoDbContext(string nameOrConnectionString, IEntitiesEncryptionService encryptionService, string encryptionPublicKey)
+        public ConfidentialUserInfoDbContext(string nameOrConnectionString, IEntitiesEncryptionService encryptionService, string encryptionIv)
             : base(nameOrConnectionString)
         {
             if (encryptionService == null) throw new ArgumentNullException(nameof(encryptionService));
             _encryptionService = encryptionService;
-            _encryptionPublicKey = encryptionPublicKey;
+            _encryptionIv = encryptionIv;
             ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += ObjectMaterialized;
-        }
-
-        private void ObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
-        {
-            _encryptionService.DecryptEntity((IEncryptedEntity)e.Entity, _encryptionPublicKey, DecryptEntityCallBack);
         }
 
         public IDbSet<ConfidentialUserInfo> ConfidentialUserInfo { get; set; }
@@ -40,14 +35,15 @@ namespace EfDemo.Data.Providers.SQL
             var pendingEntities = GetPendingEntities(contextAdapter);
             var result = default(int);
             if (pendingEntities == null) return result;
-            foreach (var entry in pendingEntities)
+            var objectStateEntries = pendingEntities as IList<ObjectStateEntry> ?? pendingEntities.ToList();
+            foreach (var entry in objectStateEntries)
             {
-                _encryptionService.EncryptEntity((IEncryptedEntity)entry.Entity, _encryptionPublicKey);
+                _encryptionService.EncryptEntity((IEncryptedEntity)entry.Entity, "", _encryptionIv);
             }
             result = base.SaveChanges();
-            foreach (var entry in pendingEntities)
+            foreach (var entry in objectStateEntries)
             {
-                _encryptionService.DecryptEntity((IEncryptedEntity)entry.Entity, _encryptionPublicKey, DecryptEntityCallBack);
+                _encryptionService.DecryptEntity((IEncryptedEntity)entry.Entity, ((IEncryptedEntity)entry.Entity).DecryptionPrivateKey, _encryptionIv, DecryptEntityCallBack);
             }
             return result;
         }
@@ -60,22 +56,17 @@ namespace EfDemo.Data.Providers.SQL
             var pendingEntities = GetPendingEntities(contextAdapter);
             var result = default(int);
             if (pendingEntities == null) return result;
-            foreach (var entry in pendingEntities)
+            var objectStateEntries = pendingEntities as IList<ObjectStateEntry> ?? pendingEntities.ToList();
+            foreach (var entry in objectStateEntries)
             {
-                _encryptionService.EncryptEntity((IEncryptedEntity)entry.Entity, _encryptionPublicKey);
+                await _encryptionService.EncryptEntityAsync((IEncryptedEntity)entry.Entity, "", _encryptionIv, cancellationToken).ConfigureAwait(false);
             }
             result = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-            foreach (var entry in pendingEntities)
+            foreach (var entry in objectStateEntries)
             {
-                _encryptionService.DecryptEntity((IEncryptedEntity)entry.Entity, _encryptionPublicKey, DecryptEntityCallBack);
+                await _encryptionService.DecryptEntityAsync((IEncryptedEntity)entry.Entity, ((IEncryptedEntity)entry.Entity).DecryptionPrivateKey, _encryptionIv, DecryptEntityCallBack, cancellationToken).ConfigureAwait(false);
             }
             return result;
-        }
-
-        private void DecryptEntityCallBack(IEncryptedEntity encryptedEntity, string propertyName, string propertyValue)
-        {
-            this.Entry(encryptedEntity).Property(propertyName).OriginalValue = propertyValue;
-            this.Entry(encryptedEntity).Property(propertyName).IsModified = false;
         }
 
         private static IEnumerable<ObjectStateEntry> GetPendingEntities(IObjectContextAdapter contextAdapter) =>
@@ -84,5 +75,17 @@ namespace EfDemo.Data.Providers.SQL
                                                             .Where(en => !en.IsRelationship)
                                                             .Where(e => e.Entity is IEncryptedEntity)
                                                             .ToList();
+
+        private void DecryptEntityCallBack(IEncryptedEntity encryptedEntity, string propertyName, string propertyValue)
+        {
+            this.Entry(encryptedEntity).Property(propertyName).OriginalValue = propertyValue;
+            this.Entry(encryptedEntity).Property(propertyName).IsModified = false;
+        }
+
+        private void ObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
+        {
+            _encryptionService.DecryptEntity((IEncryptedEntity)e.Entity,
+                ((IEncryptedEntity)e.Entity).DecryptionPrivateKey, _encryptionIv, DecryptEntityCallBack);
+        }
     }
 }
